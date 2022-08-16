@@ -5,15 +5,17 @@ import DarkModeSwitch from "./DarkModeSwitch";
 import AddIcon from "@mui/icons-material/Add";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useCustomUseContext } from "../ContextProvider";
 
-const Sidebar = (props) => {
+const Sidebar = () => {
   const [sidebarOn, setSidebarOn] = useState(true);
-  let {boards} = props.data;
+  let { boards, setBoardActive } = useCustomUseContext();
   console.log(boards);
   let BoardChipData = boards.map((item, index) => {
-    return (
-    index ? <BoardChip name={item.name} /> : <BoardChip name={item.name} active={"active"} />
-    )
+    return <BoardChip
+        key={index}
+        board={item}
+      />
   });
 
   return (
