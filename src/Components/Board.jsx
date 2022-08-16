@@ -7,7 +7,7 @@ const Board = (props) => {
   const boardColors = {
     "Todo" : "red",
     "Doing" : "orange",
-    "Done" : "yellow-green",
+    "Done" : "yellowgreen",
   }
   return (
     <div className="board">
