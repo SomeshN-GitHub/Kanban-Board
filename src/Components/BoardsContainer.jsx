@@ -1,16 +1,20 @@
-import React from 'react'
-import Board from './Board'
+import React from "react";
+import Board from "./Board";
+import { useCustomUseContext } from "../ContextProvider";
 
 const BoardsContainer = () => {
-
+  let {
+    boardActive: { columns },
+  } = useCustomUseContext();
+  
+  console.log(columns);
   return (
     <div className="boards_container">
-          <Board color={"red"}/>
-          <Board color={"yellow"}/>
-          <Board color={"pink"}/>
-          <Board color={"purple"}/>
-        </div>
-  )
-}
+      {columns.map((col, index) => {
+        return <Board column={col} key={index} />;
+      })}
+    </div>
+  );
+};
 
-export default BoardsContainer
+export default BoardsContainer;

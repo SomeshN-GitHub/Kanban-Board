@@ -1,20 +1,30 @@
 import React from "react";
 import Task from "./Task";
 
+
 const Board = (props) => {
+  let {name , tasks} = props.column;
+  const boardColors = {
+    "Todo" : "red",
+    "Doing" : "orange",
+    "Done" : "yellow-green",
+  }
   return (
     <div className="board">
       <div className="board_title">
         <div
           className="color"
-          style={{ backgroundColor: `${props.color ? props.color : "green"}` }}
+          style={{ backgroundColor: `${boardColors[name]}` }}
         ></div>
         <small>
-          To Do <span>( 2 )</span>
+          {name} <span>( {tasks.length} )</span>
         </small>
       </div>
-      <Task />
-      <Task />
+      {tasks.map((task, index)=>{
+        return (
+          <Task task ={task} key={index}/>
+        )
+      })}
       
     </div>
   );

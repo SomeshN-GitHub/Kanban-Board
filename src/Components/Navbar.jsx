@@ -4,13 +4,18 @@ import {useCustomUseContext} from '../ContextProvider'
 
 const Navbar = () => {
   let {boardActive} = useCustomUseContext();
+
+const addTaskToCurrentBoard =() =>{
+  console.log("add task clicked");
+}
+
   return (
     <div className="navbar">
       <div className="nav_right">
           <h2 className="borad_name_at_nab">
               {boardActive.name}
           </h2>
-        <div className="add_btn">
+        <div className="add_btn" onClick={addTaskToCurrentBoard}>
             <AddIcon /> Add New Task
         </div>
 
