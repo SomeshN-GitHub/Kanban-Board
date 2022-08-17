@@ -7,6 +7,7 @@ import ContextProvider from "./ContextProvider";
 import Modal  from "./Components/Modal";
 
 function App() {
+  // const [state, setState] = useState({});
   const  [boards, setBoards]  = useState(data.boards);
   const [boardActive, setBoardActive] = useState(boards[0]);
   const [currentTask, setCurrentTask] = useState(boards[0].columns[2].tasks[1]);
