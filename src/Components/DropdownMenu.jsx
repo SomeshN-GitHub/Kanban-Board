@@ -7,8 +7,8 @@ export default function DropdownMenu() {
 
   return (
     <select className="dropdown" name="status" id="status">
-      {columns.map((col) => {
-        return <option value={col.name}><p>{col.name}</p></option>;
+      {columns.map((col, index) => {
+        return <option key={index} value={col.name}>{col.name}</option>;
       })}
     </select>
   );

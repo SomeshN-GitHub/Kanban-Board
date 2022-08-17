@@ -7,7 +7,7 @@ const BoardsContainer = () => {
     boardActive: { columns },
   } = useCustomUseContext();
   
-  console.log(columns);
+  // console.log(columns);
   return (
     <div className="boards_container">
       {columns.map((col, index) => {

@@ -10,7 +10,7 @@ import { useCustomUseContext } from "../ContextProvider";
 const Sidebar = () => {
   const [sidebarOn, setSidebarOn] = useState(true);
   let { boards } = useCustomUseContext();
-  console.log(boards);
+  // console.log(boards);
   let BoardChipData = boards.map((item, index) => {
     return <BoardChip
         key={index}

@@ -1,11 +1,18 @@
-import React from "react";
-
+import { useRef, useEffect } from "react";
 import TaskDetailedModal from "./TaskDetailedModal";
 
 const Modal = () => {
+  const modalRef = useRef();
+  useEffect(() => {
+    console.log(modalRef.current);
+  
+    return () => {
+      console.log("modal unmounted")
+    }
+  }, [])
   
   return (
-    <div className="modal hide" id="modal">
+    <div ref={modalRef} className="modal" id="modal">
       <TaskDetailedModal />
     </div>
   );

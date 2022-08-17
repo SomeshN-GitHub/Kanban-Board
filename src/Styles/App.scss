@@ -83,15 +83,19 @@
     width: 100%;
     padding: 0 2rem;
 
-    .add_btn {
-      @include row-flex-justify-space-between;
-      @include icon_button;
-      background-color: yellow;
-      color: $dark-text;
-      padding: 0.5rem;
-      border-radius: 40px;
-      cursor: pointer;
+    .nav_inner_right{
+      @include flex-all-center;
+      .add_btn {
+        @include row-flex-justify-space-between;
+        @include icon_button;
+        background-color: yellow;
+        color: $dark-text;
+        padding: 0.5rem;
+        border-radius: 40px;
+        cursor: pointer;
+      }
     }
+
   }
 }
 

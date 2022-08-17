@@ -6,12 +6,12 @@ import OptionsMenu from "./OptionsMenu";
 const TaskDetailedModal = () => {
   let { currentTask } = useCustomUseContext();
   let { title, subtasks } = currentTask;
-  console.log(subtasks);
+  // console.log(subtasks);
   let completedSubtasks = subtasks.filter(
     (subTask) => subTask.isCompleted
   ).length;
 
-  console.log(currentTask);
+  // console.log(currentTask);
   return (
     <div className="task_details_modal">
       <div className="task_top">
@@ -25,9 +25,9 @@ const TaskDetailedModal = () => {
         </strong>
       </small>
       <div className="subtasks_container">
-        {subtasks.map((subt) => {
+        {subtasks.map((subt, index) => {
           return (
-            <div className="subtask">
+            <div className="subtask" key={index}>
               <input type="checkbox" name="" id=""/>
               <p>{subt.title}</p>
             </div>

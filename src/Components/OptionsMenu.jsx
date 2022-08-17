@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import { useCustomUseContext } from '../ContextProvider';
 const options = [
   'Delete',
 ];
@@ -11,6 +11,7 @@ const options = [
 const ITEM_HEIGHT = 48;
 
 export default function OptionsMenu() {
+  const { setModalVisible} = useCustomUseContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -18,7 +19,7 @@ export default function OptionsMenu() {
   };
   const handleClose = () => {
     // alert("Deleted")
-    document.getElementById("modal").classList.add("hide");
+    setModalVisible(false);
     setAnchorEl(null);
   };
 

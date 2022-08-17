@@ -10,13 +10,16 @@ function App() {
   let { boards } = data;
   const [boardActive, setBoardActive] = useState(boards[0]);
   const [currentTask, setCurrentTask] = useState(boards[0].columns[2].tasks[1]);
+  const [modalVisible, setModalVisible] = useState(false);
+  // values to be made available to context provider 
   let value = {
     data,
     boards,
     boardActive,
     setBoardActive,
     currentTask,
-    setCurrentTask
+    setCurrentTask,
+    modalVisible, setModalVisible,
   }
   
   return (
@@ -24,7 +27,7 @@ function App() {
       <ContextProvider value={value}>
         <Sidebar data={data} />
         <Main boardActive={boardActive} />
-        <Modal />
+        { modalVisible && <Modal />}
       </ContextProvider>
     </div>
   );
