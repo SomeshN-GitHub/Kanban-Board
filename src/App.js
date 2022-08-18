@@ -7,12 +7,26 @@ import ContextProvider from "./ContextProvider";
 import Modal  from "./Components/Modal";
 
 function App() {
+  // const [state, setState] = useState({});
+
   const  [boards, setBoards]  = useState(data.boards);
   const [boardActive, setBoardActive] = useState(boards[0]);
   const [currentTask, setCurrentTask] = useState(boards[0].columns[2].tasks[1]);
   const [modalVisible, setModalVisible] = useState(false);
 
-// handle subtask complete incomplete toggle 
+useEffect(()=>{
+  let boards = localStorage.getItem('boards');
+  console.log("LocalSto" + typeof(JSON.parse(boards)));
+  // if(boards) setBoards(boards);
+  // else setBoards(data.boards);  
+},[])
+
+useEffect(()=>{
+  localStorage.setItem('boards', JSON.stringify(boards));
+  setCurrentTask(prevValu => prevValu);
+},[boards])
+
+// handle subtask complete incomplete toggle 00
 const handleSubtask =(columnName, subtaskIndex)=>{
   let boardIndex = boards.findIndex(board => board.name == boardActive.name);
   let tempBoards = boards;
@@ -20,6 +34,7 @@ const handleSubtask =(columnName, subtaskIndex)=>{
   let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(task => task.title == currentTask.title);
   let subtaskStatus = tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex].isCompleted;
   tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex].isCompleted = !subtaskStatus;
+  console.log("subtask clicked" + tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex].title)
   setBoards(tempBoards);
 }
 
@@ -37,7 +52,7 @@ useEffect(()=>{
     modalVisible, setModalVisible,
     handleSubtask
   }
-  console.log(boards);
+  console.log(JSON.parse(localStorage.getItem('boards')));
   return (
     <div className="App">
       <ContextProvider value={value}>

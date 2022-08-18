@@ -19,7 +19,7 @@ export default function OptionsMenu() {
   };
   const handleClose = () => {
     // alert("Deleted")
-    setModalVisible(false);
+    // setModalVisible(false);
     setAnchorEl(null);
   };
 
