@@ -14,7 +14,7 @@ const Modal = () => {
 
   useEffect(() => {
     console.log('model ref current'+modalRef.current);
-    document.addEventListener("click", handler);
+    // document.addEventListener("click", handler);
   
     return () => {
       console.log("modal unmounted");

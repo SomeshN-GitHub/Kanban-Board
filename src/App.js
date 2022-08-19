@@ -6,30 +6,35 @@ import { useEffect, useState } from "react";
 import ContextProvider from "./ContextProvider";
 import Modal  from "./Components/Modal";
 
+function getLocalStorageData (){
+  return JSON.parse(localStorage.getItem('boards')) ?? [];
+}
+
 function App() {
   // const [state, setState] = useState({});
 
-  const  [boards, setBoards]  = useState(data.boards);
+  const  [boards, setBoards]  = useState(getLocalStorageData());
   const [boardActive, setBoardActive] = useState(boards[0]);
   const [currentTask, setCurrentTask] = useState(boards[0].columns[2].tasks[1]);
   const [modalVisible, setModalVisible] = useState(false);
 
-useEffect(()=>{
-  let boards = localStorage.getItem('boards');
-  console.log("LocalSto" + typeof(JSON.parse(boards)));
-  // if(boards) setBoards(boards);
-  // else setBoards(data.boards);  
-},[])
+// useEffect(()=>{
+//   let boards = localStorage.getItem('boards');
+//   console.log("LocalSto" + typeof(JSON.parse(boards)));
+//   // if(boards) setBoards(boards);
+//   // else setBoards(data.boards);  
+// },[])
 
 useEffect(()=>{
   localStorage.setItem('boards', JSON.stringify(boards));
-  setCurrentTask(prevValu => prevValu);
+  setCurrentTask(currentTask);
+  console.log("boards updated");
 },[boards])
 
 // handle subtask complete incomplete toggle 00
 const handleSubtask =(columnName, subtaskIndex)=>{
   let boardIndex = boards.findIndex(board => board.name == boardActive.name);
-  let tempBoards = boards;
+  let tempBoards = [...boards];
   let columnIndex = boards[boardIndex].columns.findIndex(column => column.name == columnName);
   let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(task => task.title == currentTask.title);
   let subtaskStatus = tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex].isCompleted;
