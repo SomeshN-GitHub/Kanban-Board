@@ -181,12 +181,22 @@
 }
 
 // modal
-.modal {
-  @include flex-all-center;
-  position: absolute;
+.modal_bg{
+  position: fixed;
   height: 100vh;
   width: 100vw;
   backdrop-filter: blur(1px);
+
+}
+.modal {
+  @include flex-all-center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  min-width: 400px;
+  width: 30%;
+  z-index: 10;
   svg {
     color: yellow;
   }
@@ -195,15 +205,20 @@
 // detailed task view in modal
 .task_details_modal {
   background-color: #111;
-  min-width: 400px;
-  width: 30%;
   padding: 0.3rem 1rem;
   display: flex;
   gap: 1rem;
   flex-direction: column;
+  width: 100%;
 
   .delete{
-    color: tomato;
+    color: rgba(255, 0, 0, 0.349);
+    padding: 10px 0 0 0;
+    font-size: 2rem;
+    &:hover{
+      color: rgba(255, 0, 0, 1);
+      transform: scale(1.2);
+    }
   }
   .task_top {
     @include row-flex-justify-space-between;

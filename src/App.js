@@ -31,17 +31,7 @@ useEffect(()=>{
   console.log("boards updated");
 },[boards])
 
-// handle subtask complete incomplete toggle 00
-const handleSubtask =(columnName, subtaskIndex)=>{
-  let boardIndex = boards.findIndex(board => board.name == boardActive.name);
-  let tempBoards = [...boards];
-  let columnIndex = boards[boardIndex].columns.findIndex(column => column.name == columnName);
-  let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(task => task.title == currentTask.title);
-  let subtaskStatus = tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex].isCompleted;
-  tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex].isCompleted = !subtaskStatus;
-  console.log("subtask clicked" + tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].subtasks[subtaskIndex].title)
-  setBoards(tempBoards);
-}
+
 
 // useEffect(()=>{
 //   setCurrentTask(prevTask => prevTask);
@@ -50,19 +40,19 @@ const handleSubtask =(columnName, subtaskIndex)=>{
   let value = {
     data,
     boards,
+    setBoards,
     boardActive,
     setBoardActive,
     currentTask,
     setCurrentTask,
     modalVisible, setModalVisible,
-    handleSubtask
   }
   console.log(JSON.parse(localStorage.getItem('boards')));
   return (
     <div className="App">
       <ContextProvider value={value}>
         <Sidebar data={data} />
-        <Main boardActive={boardActive} />
+        <Main />
         { modalVisible && <Modal />}
       </ContextProvider>
     </div>

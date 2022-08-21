@@ -1,31 +1,30 @@
 import { useRef, useEffect } from "react";
 import TaskDetailedModal from "./TaskDetailedModal";
-import { useCustomUseContext } from '../ContextProvider';
+import { useCustomUseContext } from "../ContextProvider";
 
 const Modal = () => {
-  const modalRef = useRef();
-  const { setModalVisible} = useCustomUseContext();
-  function handler (e){
-      if(! modalRef.current?.contains(e.target)){
-        setModalVisible(false);
-        console.log(modalRef.current?.contains(e.target));
-      }    
+  const taskRef = useRef();
+  const {currentTask,setModalVisible } = useCustomUseContext();
+  function handleOutsideClick(e) {
+    console.log(taskRef.current?.contains(e.target));
+    if (!taskRef.current?.contains(e.target)) setModalVisible(false);
   }
 
   useEffect(() => {
-    console.log('model ref current'+modalRef.current);
-    // document.addEventListener("click", handler);
-  
+    document.querySelector(".modal_bg").addEventListener("click", handleOutsideClick);
     return () => {
       console.log("modal unmounted");
-        document.removeEventListener("click", handler);
-    }
-  }, [])
-  
+      // document.querySelector(".modal_bg").removeEventListener("click", handleOutsideClick);
+    };
+  }, [currentTask]);
+
   return (
-    <div ref={modalRef} className="modal" id="modal">
-      <TaskDetailedModal />
-    </div>
+    <>
+      <div className="modal_bg"></div>
+      <div className="modal" id="modal" ref={taskRef}>
+        <TaskDetailedModal  />
+      </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useCustomUseContext } from "../ContextProvider";
-import OptionsMenu from "./OptionsMenu";
+
 
 const Navbar = () => {
   let { boardActive } = useCustomUseContext();
@@ -18,7 +18,6 @@ const Navbar = () => {
           <div className="add_btn" onClick={addTaskToCurrentBoard}>
             <AddIcon /> Add New Task
           </div>
-          <OptionsMenu />
         </div>
       </div>
     </div>
