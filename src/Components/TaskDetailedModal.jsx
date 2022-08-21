@@ -1,13 +1,12 @@
 import React from "react";
 import { useCustomUseContext } from "../ContextProvider";
 import DropdownMenu from "./DropdownMenu";
-import OptionsMenu from "./OptionsMenu";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 const TaskDetailedModal = () => {
-  let { currentTask, handleSubtask } = useCustomUseContext();
+  let { setModalVisible, currentTask, handleSubtask } = useCustomUseContext();
   let { subtasks } = currentTask;
-  // console.log(subtasks);
   let completedSubtasks = subtasks.filter(
     (subTask) => subTask.isCompleted
   ).length;
@@ -17,7 +16,7 @@ const TaskDetailedModal = () => {
     <div className="task_details_modal">
       <div className="task_top">
         <strong> {currentTask.title}</strong>
-        <OptionsMenu />
+        <DeleteForeverIcon className='delete'/>
       </div>
       <small>{currentTask.description}</small>
       <small>
@@ -31,7 +30,7 @@ const TaskDetailedModal = () => {
             <div className="subtask" key={index} onClick={(e)=>{
               console.log(e.currentTarget);
               handleSubtask(currentTask.status, index)}}>
-              <input type="checkbox" defaultChecked={subt.isCompleted} id="" />
+              <input type="checkbox" checked={subt.isCompleted} id="" />
               <p className={subt.isCompleted && "completed"}>{subt.title}</p>
             </div>
           );

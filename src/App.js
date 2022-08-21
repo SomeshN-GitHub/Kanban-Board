@@ -7,7 +7,7 @@ import ContextProvider from "./ContextProvider";
 import Modal  from "./Components/Modal";
 
 function getLocalStorageData (){
-  return JSON.parse(localStorage.getItem('boards')) ?? [];
+  return JSON.parse(localStorage.getItem('boards')) ?? data.boards;
 }
 
 function App() {
@@ -43,9 +43,9 @@ const handleSubtask =(columnName, subtaskIndex)=>{
   setBoards(tempBoards);
 }
 
-useEffect(()=>{
-  setCurrentTask(prevTask => prevTask);
-}, [boards])
+// useEffect(()=>{
+//   setCurrentTask(prevTask => prevTask);
+// }, [boards])
   // values to be made available to context provider 
   let value = {
     data,
