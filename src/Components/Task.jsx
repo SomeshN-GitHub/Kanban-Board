@@ -7,7 +7,7 @@ const Task = (props) => {
   let completedSubtasks = subtasks.filter(subTask => subTask.isCompleted).length;
   return (
     <div className="task" onClick={()=>{
-      setCurrentTask(props.task)
+      setCurrentTask(props.task);
       setModalVisible(true);
       }}>
         <h3 className="task_title">{title}</h3>

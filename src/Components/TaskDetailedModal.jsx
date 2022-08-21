@@ -12,13 +12,13 @@ const TaskDetailedModal = (props) => {
   ).length;
 
   // handle subtask complete incomplete toggle 00
-  const handleSubtask = (columnName, subtaskIndex) => {
+  const handleSubtask = ( subtaskIndex) => {
     let boardIndex = boards.findIndex(
-      (board) => board.name == boardActive.name
+      (board) => board.id === boardActive.id
     );
     let tempBoards = [...boards];
     let columnIndex = boards[boardIndex].columns.findIndex(
-      (column) => column.name == columnName
+      (column) => column.name == currentTask.status
     );
     let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(
       (task) => task.title == currentTask.title
@@ -39,7 +39,33 @@ const TaskDetailedModal = (props) => {
     setBoards(tempBoards);
   };
 
-  
+
+  // handle task movement e.g. from todo -> doing
+  const handleColumnChange =(e) =>{
+    console.log(e.target.value);
+    // source column  
+    let boardIndex = boards.findIndex(
+      (board) => board.id === boardActive.id
+    );
+    let tempBoards = [...boards];
+    let columnIndex = boards[boardIndex].columns.findIndex(
+      (column) => column.name == currentTask.status
+    );
+    let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(
+      (task) => task.title == currentTask.title
+    );
+    
+    tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].status = e.target.value;
+    let taskToMove = tempBoards[boardIndex].columns[columnIndex].tasks.slice(taskIndex,1);
+    // target column  
+    
+    let targetColumnIndex = boards[boardIndex].columns.findIndex(
+      (column) => column.name == e.target.value
+    );
+    tempBoards[boardIndex].columns[targetColumnIndex].tasks.push(taskToMove);
+    setBoards(tempBoards);
+    
+  }
 
   // console.log("subtask re rendereed");
   return (
@@ -62,7 +88,7 @@ const TaskDetailedModal = (props) => {
               key={index}
               onClick={(e) => {
                 console.log(e.currentTarget);
-                handleSubtask(currentTask.status, index);
+                handleSubtask(index);
               }}
             >
               <input
@@ -79,7 +105,7 @@ const TaskDetailedModal = (props) => {
         })}
       </div>
       <small>Status</small>
-      <DropdownMenu />
+      <DropdownMenu handleColumnChange={handleColumnChange}/>
     </div>
   );
 };
