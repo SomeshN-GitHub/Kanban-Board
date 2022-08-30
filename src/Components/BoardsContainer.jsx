@@ -1,5 +1,5 @@
 import React from "react";
-import Board from "./Board";
+import Column from "./Column";
 import { useCustomUseContext } from "../ContextProvider";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -12,7 +12,7 @@ const BoardsContainer = () => {
   return (
     <div className="boards_container">
       {columns.map((col, index) => {
-        return <Board column={col} key={index} />;
+        return <Column column={col} key={index} />;
       })}
       <div className="board">
         <div className="add_column" >

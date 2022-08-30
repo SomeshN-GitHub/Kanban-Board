@@ -2,7 +2,7 @@ import React from "react";
 import Task from "./Task";
 
 
-const Board = (props) => {
+const Column = (props) => {
   let {name , tasks} = props.column;
   const boardColors = {
     "Todo" : "red",
@@ -30,4 +30,4 @@ const Board = (props) => {
   );
 };
 
-export default Board;
+export default Column;

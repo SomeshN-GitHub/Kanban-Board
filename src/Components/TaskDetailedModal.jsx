@@ -4,10 +4,10 @@ import DropdownMenu from "./DropdownMenu";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const TaskDetailedModal = (props) => {
-  let { boards, setBoards, setModalVisible, currentTask, boardActive } =
+  let { boards, setBoards, setModalVisible, currentTask, setCurrentTask, boardActive } =
     useCustomUseContext();
   let { subtasks } = currentTask;
-  let completedSubtasks = subtasks.filter(
+  let completedSubtasks = subtasks?.filter(
     (subTask) => subTask.isCompleted
   ).length;
 
@@ -42,6 +42,7 @@ const TaskDetailedModal = (props) => {
 
   // handle task movement e.g. from todo -> doing
   const handleColumnChange =(e) =>{
+    console.group("Handle column Chnage");
     console.log(e.target.value);
     // source column  
     let boardIndex = boards.findIndex(
@@ -55,16 +56,24 @@ const TaskDetailedModal = (props) => {
       (task) => task.title == currentTask.title
     );
     
-    tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].status = e.target.value;
-    let taskToMove = tempBoards[boardIndex].columns[columnIndex].tasks.slice(taskIndex,1);
-    // target column  
+    // tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].status = e.target.value;
+    tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex] = { ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex], status:e.target.value} ;
+    let taskToMove = {...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex]};
+    setCurrentTask({...taskToMove});
     
+    // target column      
     let targetColumnIndex = boards[boardIndex].columns.findIndex(
       (column) => column.name == e.target.value
     );
+    // add task to new column 
     tempBoards[boardIndex].columns[targetColumnIndex].tasks.push(taskToMove);
-    setBoards(tempBoards);
+
+    // delete task from previous column 
+    tempBoards[boardIndex].columns[columnIndex].tasks.splice(taskIndex,1)
+
+    setBoards((prevBoards)=>[...tempBoards]);
     
+    console.groupEnd("END Handle column Chnage");
   }
 
   // console.log("subtask re rendereed");
@@ -77,11 +86,11 @@ const TaskDetailedModal = (props) => {
       <small>{currentTask.description}</small>
       <small>
         <strong>
-          Subtasks ( {completedSubtasks} of {subtasks.length} ){" "}
+          Subtasks ( {completedSubtasks} of {subtasks?.length} ){" "}
         </strong>
       </small>
       <div className="subtasks_container">
-        {subtasks.map((subt, index) => {
+        {subtasks?.map((subt, index) => {
           return (
             <div
               className="subtask"

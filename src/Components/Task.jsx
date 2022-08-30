@@ -4,7 +4,7 @@ import { useCustomUseContext } from '../ContextProvider';
 const Task = (props) => {
   let {title, subtasks} = props.task;
   const {setCurrentTask, setModalVisible} = useCustomUseContext();
-  let completedSubtasks = subtasks.filter(subTask => subTask.isCompleted).length;
+  let completedSubtasks = subtasks?.filter(subTask => subTask.isCompleted).length;
   return (
     <div className="task" onClick={()=>{
       setCurrentTask(props.task);
@@ -13,7 +13,7 @@ const Task = (props) => {
         <h3 className="task_title">{title}</h3>
         <small>
           <span className="completed_task">{completedSubtasks}</span> of 
-          <span className="total_task"> {subtasks.length} </span>
+          <span className="total_task"> {subtasks?.length} </span>
           subtasks
         </small>
       </div>
