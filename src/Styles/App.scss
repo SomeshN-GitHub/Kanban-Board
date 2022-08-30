@@ -11,6 +11,9 @@
   @include text-glow;
   background-color: $dark-bg;
 }
+svg:hover{
+  cursor: pointer;
+}
 
 .App {
   display: flex;

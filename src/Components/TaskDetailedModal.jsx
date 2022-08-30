@@ -4,18 +4,22 @@ import DropdownMenu from "./DropdownMenu";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const TaskDetailedModal = (props) => {
-  let { boards, setBoards, setModalVisible, currentTask, setCurrentTask, boardActive } =
-    useCustomUseContext();
+  let {
+    boards,
+    setBoards,
+    setModalVisible,
+    currentTask,
+    setCurrentTask,
+    boardActive,
+  } = useCustomUseContext();
   let { subtasks } = currentTask;
   let completedSubtasks = subtasks?.filter(
     (subTask) => subTask.isCompleted
   ).length;
 
   // handle subtask complete incomplete toggle 00
-  const handleSubtask = ( subtaskIndex) => {
-    let boardIndex = boards.findIndex(
-      (board) => board.id === boardActive.id
-    );
+  const handleSubtask = (subtaskIndex) => {
+    let boardIndex = boards.findIndex((board) => board.id === boardActive.id);
     let tempBoards = [...boards];
     let columnIndex = boards[boardIndex].columns.findIndex(
       (column) => column.name == currentTask.status
@@ -39,49 +43,71 @@ const TaskDetailedModal = (props) => {
     setBoards(tempBoards);
   };
 
-
   // handle task movement e.g. from todo -> doing
-  const handleColumnChange =(e) =>{
-    console.group("Handle column Chnage");
-    console.log(e.target.value);
-    // source column  
-    let boardIndex = boards.findIndex(
-      (board) => board.id === boardActive.id
-    );
+  const handleColumnChange = (e) => {
+    // console.group("Handle column Chnage");
+    // console.log(e.target.value);
+    // source column
     let tempBoards = [...boards];
+    let boardIndex = boards.findIndex((board) => board.id === boardActive.id);
+    // find the column index
     let columnIndex = boards[boardIndex].columns.findIndex(
       (column) => column.name == currentTask.status
     );
+    // find the task index
     let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(
       (task) => task.title == currentTask.title
     );
-    
-    // tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex].status = e.target.value;
-    tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex] = { ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex], status:e.target.value} ;
-    let taskToMove = {...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex]};
-    setCurrentTask({...taskToMove});
-    
-    // target column      
+
+    // Change the column name on the task
+    tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex] = {
+      ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex],
+      status: e.target.value,
+    };
+
+    let taskToMove = {
+      ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex],
+    };
+    setCurrentTask({ ...taskToMove });
+
+    // target column (where task is to be moved)
     let targetColumnIndex = boards[boardIndex].columns.findIndex(
       (column) => column.name == e.target.value
     );
-    // add task to new column 
+    // add task to new column
     tempBoards[boardIndex].columns[targetColumnIndex].tasks.push(taskToMove);
 
-    // delete task from previous column 
-    tempBoards[boardIndex].columns[columnIndex].tasks.splice(taskIndex,1)
+    // delete task from previous column
+    tempBoards[boardIndex].columns[columnIndex].tasks.splice(taskIndex, 1);
 
-    setBoards((prevBoards)=>[...tempBoards]);
-    
-    console.groupEnd("END Handle column Chnage");
-  }
+    setBoards((prevBoards) => [...tempBoards]);
+
+    // console.groupEnd("END Handle column Chnage");
+  };
+
+  // Deleting a task
+  console.group("START: Delete Task");
+  const handleDeleteTask = () => {
+    let tempBoards = [...boards];
+    let boardIndex = boards.findIndex((board) => board.id === boardActive.id);
+    // find the column index
+    let columnIndex = boards[boardIndex].columns.findIndex(
+      (column) => column.name == currentTask.status
+    );
+    // find the task index
+    let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(
+      (task) => task.title == currentTask.title
+    );
+    tempBoards[boardIndex].columns[columnIndex].tasks.splice(taskIndex,1);
+    setModalVisible(false)
+  };
 
   // console.log("subtask re rendereed");
   return (
     <div className="task_details_modal">
       <div className="task_top">
         <strong> {currentTask.title}</strong>
-        <DeleteForeverIcon className="delete" />
+        <DeleteForeverIcon className="delete" onClick={handleDeleteTask} />
       </div>
       <small>{currentTask.description}</small>
       <small>
@@ -114,7 +140,7 @@ const TaskDetailedModal = (props) => {
         })}
       </div>
       <small>Status</small>
-      <DropdownMenu handleColumnChange={handleColumnChange}/>
+      <DropdownMenu handleColumnChange={handleColumnChange} />
     </div>
   );
 };
