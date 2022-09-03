@@ -15,6 +15,16 @@ svg:hover{
   cursor: pointer;
 }
 
+.add_btn {
+  @include row-flex-justify-space-between;
+  @include icon_button;
+  background-color: yellow;
+  color: $dark-text;
+  padding: 0.5rem;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
 .App {
   display: flex;
   height: 100vh;
@@ -44,6 +54,7 @@ svg:hover{
       flex: 1;
       min-width: 250px;
       @include column-flex-align-flex-start;
+      @include flex-all-center;
       justify-content: flex-start;
       gap: 1rem;
       
@@ -189,6 +200,7 @@ svg:hover{
   height: 100vh;
   width: 100vw;
   backdrop-filter: blur(1px);
+  background-color: rgba(10, 247, 247, 0.212);
 
 }
 .modal {
@@ -261,6 +273,59 @@ svg:hover{
       color: $dark-text;
       background-color: transparent;
     }
+  }
+}
+
+.addTaskModal{
+  @include column-flex-align-flex-start;
+  padding: 1rem;
+  background-color: #111;
+  width: 100%;
+  gap: 0.5rem;
+  *{
+    width: 100%;
+    align-content: stretch ;
+    }
+  input, textarea{
+    background-color: transparent;
+    padding: 0.5rem;
+    border-radius: 5px;
+    color: white;
+    outline: none;
+    border: 1px solid gray;
+    
+    &:focus{
+      border: 1px solid yellow;
+      
+    }
+  }
+  button{
+    @include flex-all-center;
+  }
+
+  .subtask{
+    @include flex-all-center;
+    gap: 0.2rem;
+    button{
+      max-width: fit-content;
+      padding: 0.5rem;
+      background-color: transparent;
+      color: rgba(255, 38, 0, 0.63);
+      border: transparent;
+      font-weight: 800;
+      &:hover{
+        color: rgba(255, 38, 0, 1 );        
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+    }
+  }
+  .subtask ~ button:first-of-type{
+    background-color: transparent;
+    width: 50%;
+    margin: auto;
+    color: white;
+    border: 1px solid gray;
   }
 }
 

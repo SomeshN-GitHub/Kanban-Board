@@ -1,14 +1,19 @@
 import React from "react";
 import Task from "./Task";
-
+import AddIcon from "@mui/icons-material/Add";
 
 const Column = (props) => {
-  let {name , tasks} = props.column;
+  let { name, tasks } = props.column;
   const boardColors = {
-    "Todo" : "red",
-    "Doing" : "orange",
-    "Done" : "yellowgreen",
-  }
+    Todo: "red",
+    Doing: "orange",
+    Done: "yellowgreen",
+  };
+
+  const addTaskToCurrentBoard = () => {
+    console.log("add task clicked");
+  };
+
   return (
     <div className="board">
       <div className="board_title">
@@ -20,12 +25,12 @@ const Column = (props) => {
           {name} <span>( {tasks.length} )</span>
         </small>
       </div>
-      {tasks.map((task, index)=>{
-        return (
-          <Task task ={task} key={index}/>
-        )
+      {tasks.map((task, index) => {
+        return <Task task={task} key={index} />;
       })}
-      
+      <div className="add_btn" onClick={addTaskToCurrentBoard}>
+        <AddIcon /> Add New Task
+      </div>
     </div>
   );
 };
