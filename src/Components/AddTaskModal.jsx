@@ -6,16 +6,10 @@ const AddTaskModal = (props) => {
     boards,
     setBoards,
     boardActive,
-    setBoardActive,
     currentColumnIndex,
-    setCurrentColumnIndex,
+    setModalVisible,
   } = useCustomUseContext();
-  const [subtasks, setSubtasks] = useState([
-    {
-      title: "",
-      isCompleted: false,
-    },
-  ]);
+  const [subtasks, setSubtasks] = useState([]);
 
   const [task, setTask] = useState({
     title: "",
@@ -25,12 +19,17 @@ const AddTaskModal = (props) => {
   });
 
   const handleInputChange = ({ target: { name, value } }) => {
-    console.log(name + " :" + value);
+    // console.log(name + " :" + value);
     setTask(() => ({
       ...task,
       [name]: value,
     }));
   };
+
+  // update subtasks in Task as subtask changes
+  useEffect(() => {
+    setTask((prevValue) => ({ ...prevValue, subtasks: subtasks }));
+  }, [subtasks]);
 
   const handleSubtaskChange = ({ target: { id, value } }) => {
     let tempSubtask = [...subtasks];
@@ -53,16 +52,26 @@ const AddTaskModal = (props) => {
     setSubtasks([...tempSubtask]);
   };
 
+  // add task to main data
   const addTask = (e) => {
     e.preventDefault();
     console.log("task added");
     let tempBoards = [...boards];
-    let boardIndex = boards.findIndex(board => board.id == boardActive.id)
+    let boardIndex = boards.findIndex((board) => board.id == boardActive.id);
     tempBoards[boardIndex].columns[currentColumnIndex].tasks.push(task);
+    setBoards([...tempBoards]);
+    setSubtasks([]);
+    setTask({
+      title: "",
+      description: "",
+      status: boardActive.columns[currentColumnIndex].name,
+      subtasks: subtasks,
+    })
+    setModalVisible(false);
   };
 
   return (
-    <form className="addTaskModal" >
+    <form className="addTaskModal">
       <h2>Add New Task</h2>
       <small>Title</small>
       <input

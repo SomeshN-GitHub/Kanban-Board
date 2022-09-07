@@ -12,11 +12,12 @@ const Task = (props) => {
       setModalVisible(true);
       }}>
         <h3 className="task_title">{title}</h3>
-        <small>
+        {subtasks.length ? <small>
           <span className="completed_task">{completedSubtasks}</span> of 
           <span className="total_task"> {subtasks?.length} </span>
           subtasks
-        </small>
+        </small> : <small></small>}
+        
       </div>
   )
 }

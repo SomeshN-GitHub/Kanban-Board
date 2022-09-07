@@ -95,6 +95,10 @@ svg:hover {
         &:hover {
           background-color: $light-bg;
         }
+
+        small{
+          color: rgba(128, 128, 128, 0.589);
+        }
       }
     }
   }
@@ -238,7 +242,7 @@ svg:hover {
   }
 
   small {
-    display: block;
+    display: block; 
   }
   .subtasks_container {
     max-height: 200px;
