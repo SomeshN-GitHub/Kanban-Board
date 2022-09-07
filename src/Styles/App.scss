@@ -11,7 +11,7 @@
   @include text-glow;
   background-color: $dark-bg;
 }
-svg:hover{
+svg:hover {
   cursor: pointer;
 }
 
@@ -57,15 +57,15 @@ svg:hover{
       @include flex-all-center;
       justify-content: flex-start;
       gap: 1rem;
-      
-      &:last-of-type{
+
+      &:last-of-type {
         flex: 0.6;
         flex-shrink: 1;
         min-width: 60px;
         align-items: center;
         justify-content: center;
 
-        .add_column{
+        .add_column {
           @include row-flex-justify-space-between;
           @include icon_button;
           color: gray;
@@ -112,7 +112,7 @@ svg:hover{
     width: 100%;
     padding: 0 2rem;
 
-    .nav_inner_right{
+    .nav_inner_right {
       @include flex-all-center;
       .add_btn {
         @include row-flex-justify-space-between;
@@ -124,7 +124,6 @@ svg:hover{
         cursor: pointer;
       }
     }
-
   }
 }
 
@@ -195,20 +194,19 @@ svg:hover{
 }
 
 // modal
-.modal_bg{
+.modal_bg {
   position: fixed;
   height: 100vh;
   width: 100vw;
   backdrop-filter: blur(1px);
   background-color: rgba(10, 247, 247, 0.212);
-
 }
 .modal {
   @include flex-all-center;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50% , -50%);
+  transform: translate(-50%, -50%);
   min-width: 400px;
   width: 30%;
   z-index: 10;
@@ -226,11 +224,11 @@ svg:hover{
   flex-direction: column;
   width: 100%;
 
-  .delete{
+  .delete {
     color: rgba(255, 0, 0, 0.349);
     padding: 10px 0 0 0;
     font-size: 2rem;
-    &:hover{
+    &:hover {
       color: rgba(255, 0, 0, 1);
       transform: scale(1.2);
     }
@@ -258,7 +256,7 @@ svg:hover{
       gap: 0.5rem;
       padding: 0.2rem 0.5rem;
       cursor: pointer;
-      .completed{
+      .completed {
         text-decoration: line-through;
       }
     }
@@ -276,51 +274,55 @@ svg:hover{
   }
 }
 
-.addTaskModal{
+.addTaskModal {
   @include column-flex-align-flex-start;
   padding: 1rem;
   background-color: #111;
   width: 100%;
   gap: 0.5rem;
-  *{
+  * {
     width: 100%;
-    align-content: stretch ;
-    }
-  input, textarea{
+    align-content: stretch;
+  }
+  input,
+  textarea {
     background-color: transparent;
     padding: 0.5rem;
     border-radius: 5px;
     color: white;
     outline: none;
     border: 1px solid gray;
-    
-    &:focus{
+
+    &:focus {
       border: 1px solid yellow;
-      
     }
   }
-  button{
+  button {
     @include flex-all-center;
   }
 
-  .subtask{
+  .subtask {
     @include flex-all-center;
     gap: 0.2rem;
-    button{
+    button {
       max-width: fit-content;
       padding: 0.5rem;
       background-color: transparent;
       color: rgba(255, 38, 0, 0.63);
       border: transparent;
       font-weight: 800;
-      &:hover{
-        color: rgba(255, 38, 0, 1 );        
-      cursor: pointer;
-      transform: scale(1.2);
+      &:hover {
+        color: rgba(255, 38, 0, 1);
+        cursor: pointer;
+        transform: scale(1.2);
+      }
     }
+    .noSubtask{
+      color: rgba(128, 128, 128, 0.493);
+      text-align: center;
     }
   }
-  .subtask ~ button:first-of-type{
+  .subtask ~ button:first-of-type {
     background-color: transparent;
     width: 50%;
     margin: auto;
@@ -329,8 +331,7 @@ svg:hover{
   }
 }
 
-
-// utility class 
-.hide{
+// utility class
+.hide {
   display: none;
 }

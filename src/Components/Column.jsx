@@ -1,9 +1,12 @@
 import React from "react";
 import Task from "./Task";
 import AddIcon from "@mui/icons-material/Add";
+import { useCustomUseContext } from "../ContextProvider";
 
 const Column = (props) => {
   let { name, tasks } = props.column;
+  let columnIndex = props.index;
+  const {setCurrentColumnIndex, setModalVisible, setModal} = useCustomUseContext();
   const boardColors = {
     Todo: "red",
     Doing: "orange",
@@ -12,6 +15,9 @@ const Column = (props) => {
 
   const addTaskToCurrentBoard = () => {
     console.log("add task clicked");
+    setCurrentColumnIndex(columnIndex);
+    setModal("AddTaskModal");
+    setModalVisible(true);
   };
 
   return (

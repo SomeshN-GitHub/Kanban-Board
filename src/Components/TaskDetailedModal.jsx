@@ -86,7 +86,7 @@ const TaskDetailedModal = (props) => {
   };
 
   // Deleting a task
-  console.group("START: Delete Task");
+  // console.group("START: Delete Task");
   const handleDeleteTask = () => {
     let tempBoards = [...boards];
     let boardIndex = boards.findIndex((board) => board.id === boardActive.id);
@@ -101,6 +101,8 @@ const TaskDetailedModal = (props) => {
     tempBoards[boardIndex].columns[columnIndex].tasks.splice(taskIndex,1);
     setModalVisible(false)
   };
+  // console.groupEnd("START: Delete Task");
+  
 
   // console.log("subtask re rendereed");
   return (

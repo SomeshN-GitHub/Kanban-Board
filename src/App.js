@@ -15,8 +15,10 @@ function App() {
 
   const  [boards, setBoards]  = useState(getLocalStorageData());
   const [boardActive, setBoardActive] = useState(boards[0]);
+  const [currentColumnIndex, setCurrentColumnIndex] = useState(null);
   const [currentTask, setCurrentTask] = useState(boards[0].columns[2].tasks[1]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modal, setModal] = useState("TaskDetailedModal");
 
 // useEffect(()=>{
 //   let boards = localStorage.getItem('boards');
@@ -46,6 +48,8 @@ useEffect(()=>{
     currentTask,
     setCurrentTask,
     modalVisible, setModalVisible,
+    currentColumnIndex, setCurrentColumnIndex,
+    modal, setModal,
   }
   console.log(JSON.parse(localStorage.getItem('boards')));
   return (

@@ -12,7 +12,7 @@ const BoardsContainer = () => {
   return (
     <div className="boards_container">
       {columns.map((col, index) => {
-        return <Column column={col} key={index} />;
+        return <Column column={col} index={index} key={index} />;
       })}
       <div className="board">
         <div className="add_column" >

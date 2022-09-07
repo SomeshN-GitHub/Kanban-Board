@@ -3,11 +3,12 @@ import { useCustomUseContext } from '../ContextProvider';
 
 const Task = (props) => {
   let {title, subtasks} = props.task;
-  const {setCurrentTask, setModalVisible} = useCustomUseContext();
+  const {setCurrentTask, setModalVisible, setModal} = useCustomUseContext();
   let completedSubtasks = subtasks?.filter(subTask => subTask.isCompleted).length;
   return (
-    <div className="task" onClick={()=>{
+    <div className="task" draggable onClick={()=>{
       setCurrentTask(props.task);
+      setModal("TaskDetailedModal")
       setModalVisible(true);
       }}>
         <h3 className="task_title">{title}</h3>
