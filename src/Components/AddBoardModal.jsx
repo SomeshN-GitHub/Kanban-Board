@@ -5,8 +5,6 @@ const AddBoardModal = () => {
   const {
     boards,
     setBoards,
-    boardActive,
-    currentColumnIndex,
     setModalVisible,
   } = useCustomUseContext();
   const [columns, setColumns] = useState([]);
@@ -67,6 +65,7 @@ const AddBoardModal = () => {
     setModalVisible(false);
   };
 
+//   class names has been kept same as addTaskModal to reuse the styling
   return (
     <form className="addTaskModal">
       <h2>Add New Board</h2>

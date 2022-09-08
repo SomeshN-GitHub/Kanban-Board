@@ -5,8 +5,13 @@ import AddIcon from "@mui/icons-material/Add";
 
 const BoardsContainer = () => {
   let {
-    boardActive: { columns },
+    boardActive: { columns }, setModal, setModalVisible,
   } = useCustomUseContext();
+
+const handleAddColumn =()=>{
+  setModal("AddColumnModal");
+  setModalVisible(true);
+}
 
   // console.log(columns);
   return (
@@ -15,7 +20,7 @@ const BoardsContainer = () => {
         return <Column column={col} index={index} key={index} />;
       })}
       <div className="board">
-        <div className="add_column" >
+        <div className="add_column" onClick={handleAddColumn}>
           <AddIcon /> Add New Column
         </div>
       </div>

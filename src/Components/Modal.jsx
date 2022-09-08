@@ -4,6 +4,7 @@ import { useCustomUseContext } from "../ContextProvider";
 import DropdownMenu from "./DropdownMenu";
 import AddTaskModal from "./AddTaskModal";
 import AddBoardModal from "./AddBoardModal";
+import AddColumnModal from "./AddColumnModal";
 
 const Modal = () => {
   const taskRef = useRef();
@@ -30,6 +31,9 @@ const Modal = () => {
         break;
       case "AddBoardModal":
         return <AddBoardModal />;
+        break;
+      case "AddColumnModal":
+        return <AddColumnModal />;
         break;
       default:
         break;
