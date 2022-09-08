@@ -3,15 +3,20 @@ import TaskDetailedModal from "./TaskDetailedModal";
 import { useCustomUseContext } from "../ContextProvider";
 import DropdownMenu from "./DropdownMenu";
 import AddTaskModal from "./AddTaskModal";
+import AddBoardModal from "./AddBoardModal";
 
 const Modal = () => {
   const taskRef = useRef();
-  const { modal, setModal, currentTask, setModalVisible, setCurrentColumnIndex } =
-    useCustomUseContext();
+  const {
+    modal,
+    setModal,
+    currentTask,
+    setModalVisible,
+    setCurrentColumnIndex,
+  } = useCustomUseContext();
   function handleOutsideClick(e) {
     // console.log(taskRef.current?.contains(e.target));
-    if (!taskRef.current?.contains(e.target)) 
-    setModalVisible(false);
+    if (!taskRef.current?.contains(e.target)) setModalVisible(false);
     setModal("");
   }
 
@@ -20,9 +25,13 @@ const Modal = () => {
       case "TaskDetailedModal":
         return <TaskDetailedModal />;
         break;
-
-      default:
+      case "AddTaskModal":
         return <AddTaskModal />;
+        break;
+      case "AddBoardModal":
+        return <AddBoardModal />;
+        break;
+      default:
         break;
     }
   };

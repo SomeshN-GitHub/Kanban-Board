@@ -68,3 +68,20 @@ $yellow-text: #EAE509;
     }
 }
 
+@mixin add_button_style {
+    .add_btn{
+        background-color: transparent;
+        border: 2px solid transparent;
+        color: rgba(255, 255, 0, 0.356);
+        padding-right: 1rem;
+        height: 1.5rem;
+        font-size: 0.8rem;
+        &:hover{
+          color: rgba(255, 255, 0, 0.89);
+          border: 2px solid rgba(255, 255, 0, 0.89);
+        }
+        svg{
+            font-size: 1rem;
+        }
+      }
+}

@@ -4,6 +4,7 @@
   margin: 0%;
   padding: 0%;
   box-sizing: border-box;
+  transition: all 300ms ease;
 }
 
 #root {
@@ -49,6 +50,8 @@ svg:hover {
     justify-content: flex-start;
     overflow-x: scroll;
     @include scrollbars(7px, rgba(233, 255, 107, 0.233), rgb(0, 0, 0));
+
+    @include add_button_style;
 
     .board {
       flex: 1;
@@ -182,6 +185,7 @@ svg:hover {
       }
     }
 
+    @include add_button_style;
     .add_board {
       cursor: pointer;
     }

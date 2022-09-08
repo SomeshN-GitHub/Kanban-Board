@@ -9,7 +9,7 @@ import { useCustomUseContext } from "../ContextProvider";
 
 const Sidebar = () => {
   const [sidebarOn, setSidebarOn] = useState(true);
-  let { boards } = useCustomUseContext();
+  let { boards, setModal, setModalVisible } = useCustomUseContext();
   // console.log(boards);
   let BoardChipData = boards.map((item, index) => {
     return <BoardChip
@@ -17,6 +17,11 @@ const Sidebar = () => {
         board={item}
       />
   });
+
+  const handleAddBoard =()=>{
+    setModal("AddBoardModal");
+    setModalVisible(true);
+  }
 
   return (
     <div className="sidebar">
@@ -30,7 +35,7 @@ const Sidebar = () => {
         </small>
         {BoardChipData}
 
-        <div className="add_board">
+        <div className="add_board add_btn" onClick={handleAddBoard}>
           <AddIcon />
           Add New Board
         </div>
