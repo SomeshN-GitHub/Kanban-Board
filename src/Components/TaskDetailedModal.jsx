@@ -9,8 +9,8 @@ const TaskDetailedModal = (props) => {
     setBoards,
     setModalVisible,
     currentTask,
-    setCurrentTask,
     boardActive,
+    handleColumnChange
   } = useCustomUseContext();
   let { subtasks } = currentTask;
   let completedSubtasks = subtasks?.filter(
@@ -43,47 +43,47 @@ const TaskDetailedModal = (props) => {
     setBoards(tempBoards);
   };
 
-  // handle task movement e.g. from todo -> doing
-  const handleColumnChange = (e) => {
-    // console.group("Handle column Chnage");
-    // console.log(e.target.value);
-    // source column
-    let tempBoards = [...boards];
-    let boardIndex = boards.findIndex((board) => board.id === boardActive.id);
-    // find the column index
-    let columnIndex = boards[boardIndex].columns.findIndex(
-      (column) => column.name == currentTask.status
-    );
-    // find the task index
-    let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(
-      (task) => task.title == currentTask.title
-    );
+  // // handle task movement e.g. from todo -> doing
+  // const handleColumnChange = (colName) => {
+  //   // console.group("Handle column Chnage");
+  //   // console.log(e.target.value);
+  //   // source column
+  //   let tempBoards = [...boards];
+  //   let boardIndex = boards.findIndex((board) => board.id === boardActive.id);
+  //   // find the column index
+  //   let columnIndex = boards[boardIndex].columns.findIndex(
+  //     (column) => column.name == currentTask.status
+  //   );
+  //   // find the task index
+  //   let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(
+  //     (task) => task.title == currentTask.title
+  //   );
 
-    // Change the column name on the task
-    tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex] = {
-      ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex],
-      status: e.target.value,
-    };
+  //   // Change the column name on the task
+  //   tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex] = {
+  //     ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex],
+  //     status: colName,
+  //   };
 
-    let taskToMove = {
-      ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex],
-    };
-    setCurrentTask({ ...taskToMove });
+  //   let taskToMove = {
+  //     ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex],
+  //   };
+  //   setCurrentTask({ ...taskToMove });
 
-    // target column (where task is to be moved)
-    let targetColumnIndex = boards[boardIndex].columns.findIndex(
-      (column) => column.name == e.target.value
-    );
-    // add task to new column
-    tempBoards[boardIndex].columns[targetColumnIndex].tasks.push(taskToMove);
+  //   // target column (where task is to be moved)
+  //   let targetColumnIndex = boards[boardIndex].columns.findIndex(
+  //     (column) => column.name == colName
+  //   );
+  //   // add task to new column
+  //   tempBoards[boardIndex].columns[targetColumnIndex].tasks.push(taskToMove);
 
-    // delete task from previous column
-    tempBoards[boardIndex].columns[columnIndex].tasks.splice(taskIndex, 1);
+  //   // delete task from previous column
+  //   tempBoards[boardIndex].columns[columnIndex].tasks.splice(taskIndex, 1);
 
-    setBoards((prevBoards) => [...tempBoards]);
+  //   setBoards((prevBoards) => [...tempBoards]);
 
-    // console.groupEnd("END Handle column Chnage");
-  };
+  //   // console.groupEnd("END Handle column Chnage");
+  // };
 
   // Deleting a task
   // console.group("START: Delete Task");
@@ -142,9 +142,10 @@ const TaskDetailedModal = (props) => {
         })}
       </div>
       <small>Status</small>
-      <DropdownMenu handleColumnChange={handleColumnChange} />
+      <DropdownMenu handleColumnChange={(e)=>{
+        handleColumnChange(e.target.value)
+      }} />
     </div>
   );
 };
-
 export default TaskDetailedModal;

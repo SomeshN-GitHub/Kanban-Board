@@ -60,6 +60,7 @@ svg:hover {
       @include flex-all-center;
       justify-content: flex-start;
       gap: 1rem;
+      border: 1px solid transparent;
 
       &:last-of-type {
         flex: 0.6;
@@ -74,6 +75,12 @@ svg:hover {
           color: gray;
           @include blur-bg;
         }
+      }
+
+      &.draggedOver{
+        @include blur-bg;
+        border-style: dashed;
+        // border: 1px solid rgba(247, 247, 0, 0.527);
       }
 
       .board_title {
