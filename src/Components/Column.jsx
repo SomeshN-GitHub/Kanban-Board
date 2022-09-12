@@ -3,16 +3,14 @@ import Task from "./Task";
 import AddIcon from "@mui/icons-material/Add";
 import { useCustomUseContext } from "../ContextProvider";
 import { useState } from "react";
+import DeleteButton from "./DeleteButton";
 
 const Column = (props) => {
   const [isDraggedOver, setIsDraggedOver] = useState(false);
   let { name, tasks } = props.column;
   let columnIndex = props.index;
-  const {
-    setCurrentColumnIndex,
-    setModalVisible,
-    setModal,
-  } = useCustomUseContext();
+  const {boards, setBoards, boardActive, setCurrentColumnIndex, setModalVisible, setModal } =
+    useCustomUseContext();
   const boardColors = {
     Todo: "red",
     Doing: "orange",
@@ -37,6 +35,14 @@ const Column = (props) => {
     setIsDraggedOver(false);
   };
 
+  const deleteColumn =()=>{
+    console.log("Delete Column", name);
+    let tempBoards = [...boards];
+    let boardIndex = boards.findIndex((board) => board.id === boardActive.id);
+    tempBoards[boardIndex].columns.splice(columnIndex,1);
+    setBoards([...tempBoards]);
+  }
+
   return (
     <div
       className={`board ${isDraggedOver && "draggedOver"}`}
@@ -45,13 +51,16 @@ const Column = (props) => {
       onDragLeave={handleDragLeave}
     >
       <div className="board_title">
-        <div
-          className="color"
-          style={{ backgroundColor: `${boardColors[name]}` }}
-        ></div>
-        <small>
-          {name} <span>( {tasks.length} )</span>
-        </small>
+        <div className="color_title">
+          <div
+            className="color"
+            style={{ backgroundColor: `${boardColors[name]}` }}
+          ></div>
+          <small>
+            {name} <span>( {tasks.length} )</span>
+          </small>
+        </div>
+        <DeleteButton element="Column" handleDelete={deleteColumn}/>
       </div>
       {tasks.map((task, index) => {
         return <Task colName={name} task={task} key={index} />;

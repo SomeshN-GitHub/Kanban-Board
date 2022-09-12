@@ -2,6 +2,7 @@ import React from "react";
 import { useCustomUseContext } from "../ContextProvider";
 import DropdownMenu from "./DropdownMenu";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import DeleteButton from "./DeleteButton";
 
 const TaskDetailedModal = (props) => {
   let {
@@ -42,49 +43,6 @@ const TaskDetailedModal = (props) => {
     );
     setBoards(tempBoards);
   };
-
-  // // handle task movement e.g. from todo -> doing
-  // const handleColumnChange = (colName) => {
-  //   // console.group("Handle column Chnage");
-  //   // console.log(e.target.value);
-  //   // source column
-  //   let tempBoards = [...boards];
-  //   let boardIndex = boards.findIndex((board) => board.id === boardActive.id);
-  //   // find the column index
-  //   let columnIndex = boards[boardIndex].columns.findIndex(
-  //     (column) => column.name == currentTask.status
-  //   );
-  //   // find the task index
-  //   let taskIndex = boards[boardIndex].columns[columnIndex].tasks.findIndex(
-  //     (task) => task.title == currentTask.title
-  //   );
-
-  //   // Change the column name on the task
-  //   tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex] = {
-  //     ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex],
-  //     status: colName,
-  //   };
-
-  //   let taskToMove = {
-  //     ...tempBoards[boardIndex].columns[columnIndex].tasks[taskIndex],
-  //   };
-  //   setCurrentTask({ ...taskToMove });
-
-  //   // target column (where task is to be moved)
-  //   let targetColumnIndex = boards[boardIndex].columns.findIndex(
-  //     (column) => column.name == colName
-  //   );
-  //   // add task to new column
-  //   tempBoards[boardIndex].columns[targetColumnIndex].tasks.push(taskToMove);
-
-  //   // delete task from previous column
-  //   tempBoards[boardIndex].columns[columnIndex].tasks.splice(taskIndex, 1);
-
-  //   setBoards((prevBoards) => [...tempBoards]);
-
-  //   // console.groupEnd("END Handle column Chnage");
-  // };
-
   // Deleting a task
   // console.group("START: Delete Task");
   const handleDeleteTask = () => {
@@ -109,9 +67,7 @@ const TaskDetailedModal = (props) => {
     <div className="task_details_modal">
       <div className="task_top">
         <strong> {currentTask.title}</strong>
-        <div title="Delete Task">
-        <DeleteForeverIcon className="delete" onClick={handleDeleteTask} />
-        </div>
+        <DeleteButton element="Task" handleDelete={handleDeleteTask} />
       </div>
       <small>{currentTask.description}</small>
       <small>

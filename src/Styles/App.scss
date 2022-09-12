@@ -54,6 +54,7 @@ svg:hover {
     .board {
       flex: 1;
       min-width: 250px;
+      max-width: 400px;
       @include column-flex-align-flex-start;
       @include flex-all-center;
       justify-content: flex-start;
@@ -75,19 +76,31 @@ svg:hover {
         }
       }
 
-      &.draggedOver{
+      &.draggedOver {
         @include blur-bg;
       }
 
       .board_title {
         @include flex-all-center;
         gap: 0.5rem;
+        // justify-content: space-between;
+        width: 100%;
+        position: relative;
 
-        div {
-          background-color: red;
+        .color_title {
+          @include flex-all-center;
+          gap: 0.5rem;
+        }
+        .color {
+          // background-color: red;
           width: 10px;
           height: 10px;
           border-radius: 50%;
+        }
+        .delete_btn {
+          position: absolute;
+          right: 0;
+          // top: 0.5rem;
         }
       }
       .task {
@@ -102,7 +115,7 @@ svg:hover {
           background-color: $light-bg;
         }
 
-        small{
+        small {
           color: rgba(128, 128, 128, 0.589);
         }
       }
@@ -224,6 +237,9 @@ svg:hover {
   svg {
     color: yellow;
   }
+  svg.delete {
+    color: rgba(255, 0, 0, 0.349);
+  }
 }
 
 // detailed task view in modal
@@ -235,21 +251,12 @@ svg:hover {
   flex-direction: column;
   width: 100%;
 
-  .delete {
-    color: rgba(255, 0, 0, 0.349);
-    padding: 10px 0 0 0;
-    font-size: 2rem;
-    &:hover {
-      color: rgba(255, 0, 0, 1);
-      transform: scale(1.2);
-    }
-  }
   .task_top {
     @include row-flex-justify-space-between;
   }
 
   small {
-    display: block; 
+    display: block;
   }
   .subtasks_container {
     max-height: 200px;
@@ -282,6 +289,17 @@ svg:hover {
       color: $dark-text;
       background-color: transparent;
     }
+  }
+}
+
+// delete button
+.delete {
+  color: rgba(255, 0, 0, 0.349);
+  padding: 5px 0 0 0;
+  font-size: 1rem;
+  &:hover {
+    color: rgba(255, 0, 0, 1);
+    transform: scale(1.2);
   }
 }
 
@@ -328,7 +346,7 @@ svg:hover {
         transform: scale(1.2);
       }
     }
-    .noSubtask{
+    .noSubtask {
       color: rgba(128, 128, 128, 0.493);
       text-align: center;
     }
