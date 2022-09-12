@@ -109,7 +109,9 @@ const TaskDetailedModal = (props) => {
     <div className="task_details_modal">
       <div className="task_top">
         <strong> {currentTask.title}</strong>
+        <div title="Delete Task">
         <DeleteForeverIcon className="delete" onClick={handleDeleteTask} />
+        </div>
       </div>
       <small>{currentTask.description}</small>
       <small>

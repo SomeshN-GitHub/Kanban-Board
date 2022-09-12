@@ -3,14 +3,12 @@ import Task from "./Task";
 import AddIcon from "@mui/icons-material/Add";
 import { useCustomUseContext } from "../ContextProvider";
 import { useState } from "react";
-// import { handleColumnChange } from './TaskDetailedModal';
 
 const Column = (props) => {
   const [isDraggedOver, setIsDraggedOver] = useState(false);
   let { name, tasks } = props.column;
   let columnIndex = props.index;
   const {
-    handleColumnChange,
     setCurrentColumnIndex,
     setModalVisible,
     setModal,
@@ -19,9 +17,6 @@ const Column = (props) => {
     Todo: "red",
     Doing: "orange",
     Done: "yellowgreen",
-    // "": `#${Math.round(Math.random() * 256)}${Math.round(
-    //   Math.random() * 256
-    // )}${Math.round(Math.random() * 256)}`,
   };
 
   const addTaskToCurrentBoard = () => {
@@ -48,7 +43,6 @@ const Column = (props) => {
       name={name}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
-      // onDrop={handleDrop}
     >
       <div className="board_title">
         <div

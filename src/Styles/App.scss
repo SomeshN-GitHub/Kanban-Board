@@ -4,7 +4,7 @@
   margin: 0%;
   padding: 0%;
   box-sizing: border-box;
-  transition: all 300ms ease;
+  transition: background, border, color 300ms ease;
 }
 
 #root {
@@ -42,8 +42,6 @@ svg:hover {
   .boards_container {
     flex: 1;
     @include flex-all-center;
-    // flex: 1;
-    // align-items: flex-start;
     padding: 1rem;
     gap: 1rem;
     align-items: stretch;
@@ -79,8 +77,6 @@ svg:hover {
 
       &.draggedOver{
         @include blur-bg;
-        border-style: dashed;
-        // border: 1px solid rgba(247, 247, 0, 0.527);
       }
 
       .board_title {
@@ -214,7 +210,7 @@ svg:hover {
   height: 100vh;
   width: 100vw;
   backdrop-filter: blur(1px);
-  background-color: rgba(10, 247, 247, 0.212);
+  background-color: rgba(51, 51, 51, 0.212);
 }
 .modal {
   @include flex-all-center;
